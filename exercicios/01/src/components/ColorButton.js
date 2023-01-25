@@ -1,16 +1,7 @@
-import React, { useState, useEffect } from 'react'
-
-const ColorButton = () => {
-    const [color, setColor] = useState()
-
-    useEffect(() => {
-        document.body.style.backgroundColor = color
-        document.title = color
-    }, [color])
-
+const ColorButton = ({handleColor}) => {
     return(
         <div>
-            <input type="color" onChange={(e) => setColor(e.target.value)} />
+            <input type="color" onChange={(e) => handleColor(e.target.value)} />
         </div>
     )
 }
