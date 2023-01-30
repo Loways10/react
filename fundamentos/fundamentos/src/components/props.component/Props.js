@@ -88,6 +88,7 @@ const Props = () => {
             <button onClick={() => setStatus(!status)}>
                 {status ? 'Remover': 'Exibir'}
             </button>
+            
             {status && <Escola turma={turma} alunos={alunos}/>}
 
 
