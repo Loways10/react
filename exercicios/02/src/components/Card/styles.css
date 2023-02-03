@@ -1,0 +1,13 @@
+.default-li{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.bg-color-active{
+    background-color: green;
+}
+
+.bg-color-default{
+    background-color: red;
+}

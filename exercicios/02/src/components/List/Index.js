@@ -1,10 +1,15 @@
+
 import Card from '../Card/Index'
+import "./styles.css"
 
 const List = () => {
+    const a = ["Akio", "Kenji", "Sayumi"]
+
     return(
         <ul className='card-list'>
-            <Card data="24-03-2023" tarefa="Treinar"/>
-            <Card data="30-03-2023" tarefa="Aniversário Lucas"/>
+            {a.map((t) => (
+                <Card data={t.data} tarefa={t.tarefa}/>
+            ))}
         </ul>
     )
 }

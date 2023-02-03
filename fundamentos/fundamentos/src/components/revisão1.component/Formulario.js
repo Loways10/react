@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import './index.css'
 
 // Component
 import Button from './Button'
@@ -18,7 +19,7 @@ const Formulario = ({nome, email, evento}) => {
     }
 
   return (
-    <form onSubmit={verificarSenha}>
+    <form onSubmit={verificarSenha} className='formulario'>
         <div>
             <label>
                 Nome <br />

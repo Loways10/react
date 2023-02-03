@@ -1,5 +1,6 @@
 import {useState} from 'react'
 import Button from '../Button/Index'
+import './styles.css'
 
 const Card = ({data, tarefa}) => {
     const [active, setActive] = useState(false)
