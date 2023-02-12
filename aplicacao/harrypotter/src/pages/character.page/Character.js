@@ -13,16 +13,19 @@ const Character = () => {
             const data = await response.json()
 
             const array = data.filter((item) => item.id === id)
-            console.log(array[0])
 
             setCharacter({...array[0]})
         }
         request()
     }, [])
 
+    useEffect(() => {
+        console.log(Object.keys(character))
+    }, [character])
+
   return (
     <div className='character'>
-      <h1>{character.name}</h1>
+      {Object.keys(character).length ? <> <h1>{character.name}</h1>
       <div className="content">
         <div className="img-content">
             <img src={character.image} alt={character.name} />
@@ -30,11 +33,15 @@ const Character = () => {
         <div className="info-content">
             <p>
                 <span>Estado</span>
-                <strong>{character.alive ? 'Vivo' : 'Morto'}</strong>
+                <strong>{character?.alive ? 'Vivo' : 'Morto'}</strong>
             </p>
             <p>
                 <span>Bruxo</span>
-                <strong>{character.wizard ? 'Bruxo' : 'Trouxa'}</strong>
+                <strong>{character?.wizard ? 'Bruxo' : 'Trouxa'}</strong>
+            </p>
+            <p>
+                <span>Varinha</span>
+                <strong>{character?.wand?.wood} {character?.wand?.core}</strong>
             </p>
             <p>
                 <span>Sangue</span>
@@ -73,7 +80,7 @@ const Character = () => {
                 <strong>{character.actor}</strong>
             </p>
         </div>
-      </div>
+      </div> </> : <h1> Vazio </h1> }
     </div>
   )
 }
