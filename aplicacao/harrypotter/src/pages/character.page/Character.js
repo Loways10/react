@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 
 const Character = () => {
+    const noImage = 'https://st.depositphotos.com/1898481/4049/i/600/depositphotos_40493227-stock-photo-unknown-person.jpg'
     const url = 'https://hp-api.onrender.com/api'
     const {id} = useParams()
     const [character, setCharacter] = useState({})
@@ -28,7 +29,7 @@ const Character = () => {
       {Object.keys(character).length ? <> <h1>{character.name}</h1>
       <div className="content">
         <div className="img-content">
-            <img src={character.image} alt={character.name} />
+            <img src={character.image || noImage} alt={character.name} />
         </div>
         <div className="info-content">
             <p>
