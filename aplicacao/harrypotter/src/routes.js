@@ -8,6 +8,7 @@ import Characters from './pages/characters.page/Characters'
 import Spells from './pages/spells.page/Spells'
 import Houses from './pages/houses.page/Houses'
 import House from './pages/house.page/House'
+import Search from './pages/search.page/Search'
 
 const routes = () => {
   return (
@@ -19,6 +20,7 @@ const routes = () => {
           <Route path='/houses' element={<Houses />} />
           <Route path='/character/:id' element={<Character />} />
           <Route path='/house/:name' element={<House />} />
+          <Route path='/search/:search' element={<Search />} />
       </Routes>
     </BrowserRouter>
 
