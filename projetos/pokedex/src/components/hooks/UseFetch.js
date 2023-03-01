@@ -21,13 +21,7 @@ export const useFetch = (url, options = {}) => {
                 setIsLoading(false)
             })
         }
-
-        // const httpRequest = async () => {
-        //     const response = await fetch(url)
-        //     const data = await response.json()
-        //     setData(data)
-        // }
-        // httpRequest()
+        
     }, [url, options])
     
     return {data, isLoading, error}
