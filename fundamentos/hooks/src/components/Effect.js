@@ -17,6 +17,10 @@ const Effect = () => {
         setSalario( s => s + (vendas * 1.89))
     }, [vendas])
 
+    useEffect(() => {
+        console.log('fui chamado a toa')
+    })
+
     return(
         <div>
             <h2>useEffect</h2>
