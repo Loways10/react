@@ -1,9 +1,11 @@
 import React, { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 // instancia 
 import axios from '../axiosApi'
 
 const Post = ({ user, post }) => {
+    const navigate = useNavigate()
     const username = post.username || 'desconhecido'
     const avatar = post.avatar || 'https://st3.depositphotos.com/3581215/18899/v/600/depositphotos_188994514-stock-illustration-vector-illustration-male-silhouette-profile.jpg'
 
@@ -26,6 +28,15 @@ const Post = ({ user, post }) => {
         updatePost(body)
     }
 
+    const alterVisibilidade = () => {
+        const body = {
+            id: post.id,
+            visivel: !post.visivel
+        }
+        updatePost(body)
+        window.location.reload(true)
+    }
+
     const updatePost = async (body) => {
         try{
             const res = await axios.put('post',
@@ -41,41 +52,60 @@ const Post = ({ user, post }) => {
           }
     }
 
+    const deletePost = async ()=> {
+        var deletar = window.confirm('Deseja realmente deletar essa publicação?')
+        if(!deletar)
+            return
+        try{
+            const res = await axios.delete(`post/${post.id}`,
+            { 
+                headers: {
+                    "Authorization": `Bearer ${user.auth}`
+                }
+            }
+            )
+        }catch(error){
+            console.log(error.message)
+        }
+    }
+
     return (
         <div className='post'>
-            <header>
+            <header onClick={() => navigate(`/profile/${post.userID}`)}>
                 <img src={avatar} title={`Foto de perfil de ${username}`} alt={username} />
                 <span className='username'>{username}</span>
 
                 {
                     post.userID === user.id &&
                     <div className="btns">
-                        <button>visibilidade</button>
-                        <button>remove</button>
+                        <button onClick={alterVisibilidade}>{post.visivel ? 'Ocultar' : 'Ver'}</button>
+                        <button onClick={deletePost}>remove</button>
                     </div>
                 }
             </header>
 
             <p className='date'>{post.date}</p>
 
-            {
-                post.image &&
-                <div className="img">
-                    <img src={post.image} />
-                </div>
-            }
+            <div onDoubleClick={() => navigate(`/post/${post.id}`)}>
+                {
+                    post.image &&
+                    <div className="img">
+                        <img src={post.image} />
+                    </div>
+                }
 
-            {
-                post.text &&
-                <div className="text">
-                    <p>
-                        {post.text}
-                    </p>
-                </div>
-            }
+                {
+                    post.text &&
+                    <div className="text">
+                        <p>
+                            {post.text}
+                        </p>
+                    </div>
+                }
+            </div>
 
             <footer>
-                <span className={`icon ${curtidas.includes(user.id) ? 'red' : 'gray'}`} onClick={like}>
+                <span className={`icon ${curtidas && curtidas.includes(user.id) ? 'red' : 'gray'}`} onClick={like}>
                     ❤️
                 </span>
                 <span className="likes" onClick={like}>
